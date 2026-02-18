@@ -163,8 +163,9 @@ app.get("/expenses/summary", (req, res) => {
 
 //cors
 app.use(cors({
-  origin: "*"
+  origin: "https://expense-delta-blond.vercel.app/"
 }));
+
 
 
 
