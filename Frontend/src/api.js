@@ -10,9 +10,11 @@ export async function createExpense(expense) {
     body: JSON.stringify(expense),
   });
 
-  if (!response.ok) {
-    throw new Error("Failed to create expense");
-  }
+if (!response.ok) {
+  const errorData = await response.json();
+  throw new Error(errorData.error || "Failed to create expense");
+}
+
 
   return response.json();
 }

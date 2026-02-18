@@ -50,7 +50,7 @@ function App() {
       setForm({ amount: "", category: "", description: "", date: "" });
       await loadExpenses();
     } catch (err) {
-      alert("Error creating expense");
+      alert(err.message);
     } finally {
       setLoading(false);
     }
