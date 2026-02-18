@@ -27,7 +27,7 @@ export async function getCategorySummary() {
 
 export async function deleteExpense(id) {
   const response = await fetch(
-    `https://your-backend-url.onrender.com/expenses/${id}`,
+    `https://expense-iqfh.onrender.com/expenses/${id}`,
     {
       method: "DELETE",
     }
