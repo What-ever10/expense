@@ -25,6 +25,22 @@ export async function getCategorySummary() {
   return response.json();
 }
 
+export async function deleteExpense(id) {
+  const response = await fetch(
+    `https://your-backend-url.onrender.com/expenses/${id}`,
+    {
+      method: "DELETE",
+    }
+  );
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.error || "Failed to delete expense");
+  }
+
+  return response.json();
+}
+
 
 export async function getExpenses(category, sort) {
   let url = "https://expense-iqfh.onrender.com/expenses?";

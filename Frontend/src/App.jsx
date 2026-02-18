@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 //import { createExpense, getExpenses } from "./api";
 import { createExpense, getExpenses, getCategorySummary } from "./api";
+import { deleteExpense } from "./api";
 
 function App() {
   const [expenses, setExpenses] = useState([]);
@@ -31,7 +32,22 @@ function App() {
     loadExpenses();
   }, [categoryFilter, sortNewest]);
   
-  
+  async function handleDelete(id) {
+  const confirmDelete = window.confirm(
+    "Are you sure you want to delete this expense?"
+  );
+
+  if (!confirmDelete) return;
+
+  try {
+    await deleteExpense(id);
+    await loadExpenses();
+  } catch (err) {
+    alert(err.message);
+  }
+}
+
+
   async function handleShowSummary() {
   try {
     const data = await getCategorySummary();
@@ -133,6 +149,8 @@ function App() {
             <th>Category</th>
             <th>Description</th>
             <th>Amount (₹)</th>
+            <th>Actions</th>
+
           </tr>
         </thead>
         <tbody>
@@ -142,9 +160,25 @@ function App() {
               <td>{e.category}</td>
               <td>{e.description}</td>
               <td>{(e.amount / 100).toFixed(2)}</td>
+              <td>
+                <button
+                  style={{
+                    backgroundColor: "#dc2626",
+                    color: "white",
+                    border: "none",
+                    padding: "6px 10px",
+                    borderRadius: "4px",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => handleDelete(e.id)}
+                >
+                  Delete
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>
+
       </table>
     </div>
 

@@ -161,6 +161,32 @@ app.get("/expenses/summary", (req, res) => {
   }
 });
 
+// Delete expenses
+app.delete("/expenses/:id", (req, res) => {
+  const { id } = req.params;
+
+  if (!id) {
+    return res.status(400).json({ error: "Expense ID required" });
+  }
+
+  db.run(
+    "DELETE FROM expenses WHERE id = ?",
+    [id],
+    function (err) {
+      if (err) {
+        return res.status(500).json({ error: "Database error" });
+      }
+
+      if (this.changes === 0) {
+        return res.status(404).json({ error: "Expense not found" });
+      }
+
+      res.json({ message: "Expense deleted successfully" });
+    }
+  );
+});
+
+
 //cors
 app.use(cors({
   origin: "https://expense-delta-blond.vercel.app/"
