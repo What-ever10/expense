@@ -1,7 +1,7 @@
 export async function createExpense(expense) {
   const idempotencyKey = crypto.randomUUID();
 
-  const response = await fetch("http://localhost:3000/expenses", {
+  const response = await fetch("https://expense-iqfh.onrender.com/expenses", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -18,14 +18,14 @@ export async function createExpense(expense) {
 }
 
 export async function getCategorySummary() {
-  const response = await fetch("http://localhost:3000/expenses/summary");
+  const response = await fetch("https://expense-iqfh.onrender.com/expenses/summary");
   if (!response.ok) throw new Error("Failed to fetch summary");
   return response.json();
 }
 
 
 export async function getExpenses(category, sort) {
-  let url = "http://localhost:3000/expenses?";
+  let url = "https://expense-iqfh.onrender.com/expenses?";
   if (category) url += `category=${category}&`;
   if (sort) url += `sort=${sort}`;
 

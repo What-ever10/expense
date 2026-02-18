@@ -161,6 +161,10 @@ app.get("/expenses/summary", (req, res) => {
   }
 });
 
+//cors
+app.use(cors({
+  origin: "*"
+}));
 
 
 
