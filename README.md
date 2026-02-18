@@ -94,6 +94,7 @@ idempotency_key (TEXT, UNIQUE)
 * View all expenses (GET /expenses)
 * Filter expenses by category
 * Sort expenses by newest date
+* Delete existing expenses entry using the Delete feature
 * Display total of currently visible expenses
 * Category-wise summary table
 * Category summary sorted in descending order by total amount
@@ -289,6 +290,21 @@ Returns:
   }
 ]
 ```
+
+## 4 Delete Expense Functionality
+The application supports deleting individual expenses using a dedicated REST endpoint.
+
+-Endpoint:
+DELETE /expenses/:id
+
+Behavior:
+Deletes an expense by its unique id
+
+Returns:
+200 OK if deletion is successful
+404 Not Found if the expense does not exist
+500 Internal Server Error for unexpected failures
+
 
 SQL logic:
 
